@@ -2,20 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;700&display=swap');
 
 :root {
-  /* LIGHT MODE VALUES */
   --lux-cream: #fbfaf8; 
   --lux-black: #1a1a1a; 
   --lux-gray: rgba(26, 26, 26, 0.6);
   --lux-border: rgba(0, 0, 0, 0.08);
-  
   --serif: 'Playfair Display', serif;
   --sans: 'Inter', sans-serif;
   --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- THEME LOGIC (Automatic Flip) --- */
 body.dark-mode {
-  /* DARK MODE VALUES */
   --lux-cream: #121212; 
   --lux-black: #ffffff; 
   --lux-gray: rgba(255, 255, 255, 0.6);
@@ -30,42 +26,47 @@ body {
   font-family: var(--sans);
   transition: background-color 0.5s ease, color 0.5s ease;
   margin: 0;
-  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+  overflow-x: hidden;
 }
 
 /* UNIVERSAL TEXT COLOR ADJUSTMENT */
-p, span, h1, h2, h3, h4, h5, h6, label, li, a, i, input, select, textarea {
+/* Removed 'span' and 'a' from the forced !important list so they can have custom colors (like active sidebar links) */
+p, h1, h2, h3, h4, h5, h6, label, li, i, input, select, textarea {
   color: var(--lux-black) !important;
   transition: color 0.4s ease;
 }
 
-a { text-decoration: none !important; }
+a, span {
+  color: var(--lux-black); /* Inherits theme color but allows overrides */
+  text-decoration: none !important;
+}
 
-/* --- RESPONSIVE HERO CAROUSEL --- */
+/* --- THE BIG CAROUSEL FIX --- */
 .hero-viewport {
     width: 100%;
     background-color: #000;
 }
 
 .hero-item {
-    height: 80vh !important; /* Fixed height for desktop */
+    height: 80vh !important; 
     min-height: 450px;
+    position: relative; /* Safety for positioning */
     overflow: hidden;
 }
 
+/* This is the class you MUST apply to your <img> tag in Home.jsx */
 .hero-img {
     height: 100% !important;
     width: 100% !important;
-    /* This prevents the image from stretching/squashing */
-    object-fit: cover !important; 
+    object-fit: cover !important; /* Prevents the "squished" look from your image */
     object-position: center !important;
+    display: block;
 }
 
 /* --- NAVBAR & HEADER --- */
 .sticky-top, .navbar {
   background-color: var(--lux-cream) !important;
   border-bottom: 1px solid var(--lux-border);
-  transition: var(--transition);
 }
 
 .navbar-brand {
@@ -79,17 +80,17 @@ a { text-decoration: none !important; }
   border-right: 1px solid var(--lux-border);
 }
 
+/* Fixed: Active category will now show correctly */
+.sidebar-lux span {
+  color: var(--lux-gray);
+  transition: var(--transition);
+}
+
 .sidebar-lux span.active-lux {
+  color: var(--lux-black) !important;
   font-weight: 700 !important;
   border-left: 2px solid var(--lux-black);
   padding-left: 10px;
-}
-
-input.form-control, select.form-select {
-  background-color: transparent !important;
-  border: 1px solid var(--lux-border) !important;
-  color: var(--lux-black) !important;
-  border-radius: 0;
 }
 
 /* --- FOOTER --- */
@@ -98,25 +99,17 @@ input.form-control, select.form-select {
   border-top: 1px solid var(--lux-border);
 }
 
-/* --- MOBILE RESPONSIVENESS (The Big Fix) --- */
+/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    /* Adjust Carousel for Phones */
     .hero-item { 
-        height: 55vh !important; /* Shorter height for mobile screens */
+        height: 50vh !important; 
         min-height: 300px;
     }
 
-    /* Adjust font sizes for mobile readability */
     .display-5 {
         font-size: 1.8rem !important;
     }
 
-    /* Grid Spacing */
-    .row.g-5 {
-        --bs-gutter-x: 1rem; /* Reduces gap between product cards on small screens */
-    }
-
-    /* Hide sidebar border on mobile if it stacks */
     .sidebar-lux {
         border-right: none;
         border-bottom: 1px solid var(--lux-border);
@@ -136,20 +129,4 @@ input.form-control, select.form-select {
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;
-  transition: var(--transition);
-}
-
-.btn-lux:hover {
-  filter: brightness(0.9);
-}
-
-/* --- ANIMATIONS --- */
-.fade-in {
-  opacity: 0;
-  animation: luxFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes luxFadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }

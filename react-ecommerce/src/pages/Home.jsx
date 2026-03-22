@@ -31,7 +31,7 @@ const Home = () => {
           {/* Slide 1 */}
           <Carousel.Item className="hero-item">
             <img
-              className="d-block w-100 hero-img"
+              className="hero-img" /* Inalis ang d-block w-100 para hindi mag-conflict sa object-fit */
               src="/Banner1.webp"
               alt="First editorial slide"
             />
@@ -40,7 +40,7 @@ const Home = () => {
           {/* Slide 2 */}
           <Carousel.Item className="hero-item">
             <img
-              className="d-block w-100 hero-img"
+              className="hero-img"
               src="/Banner2.webp"
               alt="Second editorial slide"
             />
@@ -49,7 +49,7 @@ const Home = () => {
           {/* Slide 3 */}
           <Carousel.Item className="hero-item">
             <img
-              className="d-block w-100 hero-img"
+              className="hero-img"
               src="/Banner3.webp"
               alt="Third editorial slide"
             />
@@ -58,32 +58,31 @@ const Home = () => {
       </section>
 
       {/* EDITORIAL INTRODUCTION */}
-      {/* FIX: Ginamit ang 'py-4 py-md-5' para mas maliit ang space sa mobile */}
       <div className="container mt-4 mt-md-5 pt-3 pt-md-5">
         <div className="text-center mb-4 mb-md-5 pb-2 pb-md-4">
-          <p className="text-muted small text-uppercase mb-2" style={{ letterSpacing: '3px' }}>
+          <p className="small text-uppercase mb-2" style={{ letterSpacing: '3px', opacity: 0.6 }}>
             The Selection
           </p>
           <h2 className="display-5 mb-4" style={{ fontFamily: "var(--serif)" }}>
-            Best Mini Figures
+            Best Mini Figurines {/* UPDATED: Figures -> Figurines */}
           </h2>
-          <p className="text-muted mx-auto fw-light px-3 px-md-0" style={{ maxWidth: '600px', fontSize: '1.1rem' }}>
-            Discover our latest editorial arrivals, curated for those who appreciate the finer details of designer mini figures.
+          <p className="mx-auto fw-light px-3 px-md-0" style={{ maxWidth: '600px', fontSize: '1.1rem', opacity: 0.8 }}>
+            Discover our latest editorial arrivals, curated for those who appreciate the finer details of designer mini figurines. {/* UPDATED: Figures -> Figurines */}
           </p>
         </div>
 
         {/* THE PRODUCT GRID */}
-        {/* FIX: col-6 sa mobile para magkatabi ang dalawang items (mas mukhang professional) */}
         <div className="row g-3 g-md-5 mb-5">
           {featuredProducts.length > 0 ? (
             featuredProducts.map((product) => (
+              /* col-6 para maganda tingnan sa phone (2 columns) */
               <div key={product.id} className="col-6 col-md-6 col-lg-3">
                 <ProductCard product={product} />
               </div>
             ))
           ) : (
             <div className="col-12 text-center py-5">
-              <p className="text-muted small text-uppercase" style={{ letterSpacing: '2px' }}>
+              <p className="small text-uppercase" style={{ letterSpacing: '2px', opacity: 0.5 }}>
                 Loading Collection...
               </p>
             </div>
