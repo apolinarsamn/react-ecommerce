@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import Sidebar from "../components/Sidebar"; // Siguraduhing tama ang import path
 import { Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap"; 
 
@@ -13,86 +14,73 @@ const Home = () => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  const featuredProducts = products.slice(0, 4);
+  const featuredProducts = products.slice(0, 6); // Kumuha ng 6 products para sa grid
 
   return (
     <div className="lux-home fade-in">
-
-      {/* ======================= HERO CAROUSEL ======================= */}
+      
+      {/* 1. HERO CAROUSEL - Hiwalay sa container para maging edge-to-edge full width */}
       <section className="hero-viewport">
-        <Carousel
-          id="carouselExampleIndicators"
-          fade
-          indicators={true}
-          controls={true}
-          interval={5000}
-          pause={false}
-        >
-          {/* Slide 1 */}
+        <Carousel fade indicators={true} controls={true} interval={5000} pause={false}>
           <Carousel.Item className="hero-item">
-            <img
-              className="hero-img" /* Inalis ang d-block w-100 para hindi mag-conflict sa object-fit */
-              src="/Banner1.webp"
-              alt="First editorial slide"
-            />
+            <img className="hero-img" src="/Banner1.webp" alt="Slide 1" />
           </Carousel.Item>
-
-          {/* Slide 2 */}
           <Carousel.Item className="hero-item">
-            <img
-              className="hero-img"
-              src="/Banner2.webp"
-              alt="Second editorial slide"
-            />
+            <img className="hero-img" src="/Banner2.webp" alt="Slide 2" />
           </Carousel.Item>
-
-          {/* Slide 3 */}
           <Carousel.Item className="hero-item">
-            <img
-              className="hero-img"
-              src="/Banner3.webp"
-              alt="Third editorial slide"
-            />
+            <img className="hero-img" src="/Banner3.webp" alt="Slide 3" />
           </Carousel.Item>
         </Carousel>
       </section>
 
-      {/* EDITORIAL INTRODUCTION */}
-      <div className="container mt-4 mt-md-5 pt-3 pt-md-5">
-        <div className="text-center mb-4 mb-md-5 pb-2 pb-md-4">
-          <p className="small text-uppercase mb-2" style={{ letterSpacing: '3px', opacity: 0.6 }}>
-            The Selection
-          </p>
-          <h2 className="display-5 mb-4" style={{ fontFamily: "var(--serif)" }}>
-            Best Mini Figurines {/* UPDATED: Figures -> Figurines */}
-          </h2>
-          <p className="mx-auto fw-light px-3 px-md-0" style={{ maxWidth: '600px', fontSize: '1.1rem', opacity: 0.8 }}>
-            Discover our latest editorial arrivals, curated for those who appreciate the finer details of designer mini figurines. {/* UPDATED: Figures -> Figurines */}
-          </p>
-        </div>
+      {/* 2. MAIN CONTENT AREA - Dito na papasok ang Sidebar at Products */}
+      <div className="container mt-5 pt-4">
+        <div className="row">
+          
+          {/* SIDEBAR - 3 Columns sa desktop */}
+          <aside className="col-md-3 mb-5">
+            <Sidebar />
+          </aside>
 
-        {/* THE PRODUCT GRID */}
-        <div className="row g-3 g-md-5 mb-5">
-          {featuredProducts.length > 0 ? (
-            featuredProducts.map((product) => (
-              /* col-6 para maganda tingnan sa phone (2 columns) */
-              <div key={product.id} className="col-6 col-md-6 col-lg-3">
-                <ProductCard product={product} />
-              </div>
-            ))
-          ) : (
-            <div className="col-12 text-center py-5">
-              <p className="small text-uppercase" style={{ letterSpacing: '2px', opacity: 0.5 }}>
-                Loading Collection...
+          {/* PRODUCT LIST - 9 Columns sa desktop */}
+          <main className="col-md-9">
+            <div className="text-center mb-5">
+              <p className="small text-uppercase mb-2" style={{ letterSpacing: '3px', opacity: 0.6 }}>
+                The Selection
+              </p>
+              <h2 className="display-6 mb-4" style={{ fontFamily: "var(--serif)" }}>
+                Best Mini Figurines
+              </h2>
+              <p className="mx-auto fw-light" style={{ maxWidth: '600px', fontSize: '1rem', opacity: 0.7 }}>
+                Curated arrivals for those who appreciate designer designer art toys.
               </p>
             </div>
-          )}
-        </div>
 
-        <div className="text-center mb-5 mt-4">
-          <Link to="/products" className="btn-lux text-decoration-none">
-            View All Collections
-          </Link>
+            {/* THE PRODUCT GRID */}
+            <div className="row g-3 g-md-4">
+              {featuredProducts.length > 0 ? (
+                featuredProducts.map((product) => (
+                  <div key={product.id} className="col-6 col-lg-4">
+                    <ProductCard product={product} />
+                  </div>
+                ))
+              ) : (
+                <div className="col-12 text-center py-5">
+                  <p className="small text-uppercase" style={{ letterSpacing: '2px', opacity: 0.5 }}>
+                    Loading Collection...
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="text-center my-5">
+              <Link to="/products" className="btn-lux text-decoration-none">
+                View All Collections
+              </Link>
+            </div>
+          </main>
+
         </div>
       </div>
     </div>
