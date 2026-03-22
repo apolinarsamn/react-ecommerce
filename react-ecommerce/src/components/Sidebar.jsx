@@ -15,7 +15,7 @@ const Sidebar = ({ onSelectCategory }) => {
       .catch((error) => {
         console.error("Error fetching categories:", error);
         // Fallback categories kung offline ang API (Updated to match your actual data case)
-        setCategories(["all", "Figurines", "Accessories", "Limited"]); 
+        setCategories(["all", "Mini Figure", "Accessories", "Limited"]); 
       });
   }, []);
 
