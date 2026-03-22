@@ -55,42 +55,48 @@ body.dark-mode .nav-link:not(.btn-lux) {
   font-size: 0.75rem !important;
 }
 
-body.dark-mode .nav-link {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
 /* --- HERO & CAROUSEL RESPONSIVE FIXES --- */
-/* Desktop View (Default) */
+/* Desktop View */
 .hero-item {
-    height: 85vh; /* Standard luxury height sa desktop */
-    transition: height 0.5s ease;
+    height: 85vh !important; 
+    overflow: hidden;
+    background-color: #000; /* Para walang white space habang naglo-load */
 }
 
 .hero-img {
     height: 100% !important;
-    width: 100%;
-    object-fit: cover; /* Eto ang pumipigil sa stretching */
-    object-position: center;
+    width: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important; /* Siguradong nasa gitna ang focus */
 }
 
-/* Mobile View Adjustments */
+/* Mobile View Adjustments (Phones) */
 @media (max-width: 768px) {
     .hero-item {
-        height: 50vh !important; /* Binabaan para proportioned sa phone screen */
+        height: 60vh !important; /* Adjusted from 50vh to 60vh para mas kita ang image */
+    }
+
+    .hero-img {
+        object-fit: cover !important;
+        height: 100% !important;
     }
 
     .display-5 {
-        font-size: 1.8rem !important; /* Paliitin ang "Best Mini Figures" title */
+        font-size: 1.5rem !important;
+        letter-spacing: 1px !important;
     }
 
     .lux-home .container {
-        padding-top: 2rem !important;
+        padding-top: 1.5rem !important;
     }
 
-    /* Announcement Bar text adjustment */
+    /* Announcement Bar fix para hindi mag-wrap sa mobile */
     header div.container {
-        font-size: 0.55rem !important;
-        letter-spacing: 1.5px !important;
+        font-size: 0.5rem !important;
+        letter-spacing: 1px !important;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -111,53 +117,21 @@ body.dark-mode .carousel-indicators [data-bs-target] {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     filter: invert(1);
-    width: 2rem;
-    height: 2rem;
-}
-
-body.dark-mode .carousel-control-prev-icon,
-body.dark-mode .carousel-control-next-icon {
-    filter: invert(0);
-}
-
-/* --- SORT BY & DROPDOWN FIX --- */
-body.dark-mode select.form-select,
-body.dark-mode .sort-by-label,
-body.dark-mode .dropdown-toggle {
-    color: #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-body.dark-mode .form-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
-}
-
-/* --- FOOTER DARK MODE FIX --- */
-body.dark-mode footer, 
-body.dark-mode .footer-section {
-    background-color: #121212 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode footer h5, 
-body.dark-mode footer h6,
-body.dark-mode footer a,
-body.dark-mode footer p {
-    color: rgba(255, 255, 255, 0.8) !important;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 /* --- PRODUCT CARDS --- */
 .product-card {
   background: transparent !important;
   border: none !important;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
 .product-img-wrapper {
   background-color: #f4f4f4;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   aspect-ratio: 3 / 4; 
   overflow: hidden;
 }
@@ -169,17 +143,13 @@ body.dark-mode footer p {
   transition: var(--transition);
 }
 
-.product-card:hover .product-img {
-  transform: scale(1.05);
-}
-
 /* --- LUXURY BUTTONS --- */
 .btn-lux {
   background: var(--lux-black);
   color: var(--lux-cream);
   border-radius: 0;
-  padding: 12px 35px;
-  font-size: 0.75rem;
+  padding: 10px 25px;
+  font-size: 0.7rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;

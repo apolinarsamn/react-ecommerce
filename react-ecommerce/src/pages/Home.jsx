@@ -58,31 +58,39 @@ const Home = () => {
       </section>
 
       {/* EDITORIAL INTRODUCTION */}
-      <div className="container mt-5 pt-5">
-        <div className="text-center mb-5 pb-4">
-          <p className="text-muted small text-uppercase mb-2" style={{ letterSpacing: '3px' }}>The Selection</p>
-          <h2 className="display-5 mb-4" style={{ fontFamily: "var(--serif)" }}>Best Mini Figures</h2>
-          <p className="text-muted mx-auto fw-light" style={{ maxWidth: '600px', fontSize: '1.1rem' }}>
+      {/* FIX: Ginamit ang 'py-4 py-md-5' para mas maliit ang space sa mobile */}
+      <div className="container mt-4 mt-md-5 pt-3 pt-md-5">
+        <div className="text-center mb-4 mb-md-5 pb-2 pb-md-4">
+          <p className="text-muted small text-uppercase mb-2" style={{ letterSpacing: '3px' }}>
+            The Selection
+          </p>
+          <h2 className="display-5 mb-4" style={{ fontFamily: "var(--serif)" }}>
+            Best Mini Figures
+          </h2>
+          <p className="text-muted mx-auto fw-light px-3 px-md-0" style={{ maxWidth: '600px', fontSize: '1.1rem' }}>
             Discover our latest editorial arrivals, curated for those who appreciate the finer details of designer mini figures.
           </p>
         </div>
 
         {/* THE PRODUCT GRID */}
-        <div className="row g-5 mb-5">
+        {/* FIX: col-6 sa mobile para magkatabi ang dalawang items (mas mukhang professional) */}
+        <div className="row g-3 g-md-5 mb-5">
           {featuredProducts.length > 0 ? (
             featuredProducts.map((product) => (
-              <div key={product.id} className="col-12 col-md-6 col-lg-3">
+              <div key={product.id} className="col-6 col-md-6 col-lg-3">
                 <ProductCard product={product} />
               </div>
             ))
           ) : (
             <div className="col-12 text-center py-5">
-              <p className="text-muted small text-uppercase" style={{ letterSpacing: '2px' }}>Loading Collection...</p>
+              <p className="text-muted small text-uppercase" style={{ letterSpacing: '2px' }}>
+                Loading Collection...
+              </p>
             </div>
           )}
         </div>
 
-        <div className="text-center mb-5 mt-5">
+        <div className="text-center mb-5 mt-4">
           <Link to="/products" className="btn-lux text-decoration-none">
             View All Collections
           </Link>
