@@ -1,4 +1,7 @@
 const About = () => {
+  // Gamitin ang iyong live backend URL para sa static image
+  const BACKEND_URL = "https://react-ecommerce-api-zpw8.onrender.com";
+
   return (
     <div className='container py-5 my-5'>
       <div className="row g-5 align-items-center">
@@ -7,7 +10,8 @@ const About = () => {
         <div className="col-lg-5">
           <div className="product-img-wrapper shadow-sm">
              <img 
-               src="http://localhost:5000/images/Pop-Product1.jpg" 
+               /* FIXED: Pinalitan ang localhost ng BACKEND_URL */
+               src={`${BACKEND_URL}/images/Pop-Product1.jpg`} 
                className="product-img" 
                alt="Collector Items" 
              />
