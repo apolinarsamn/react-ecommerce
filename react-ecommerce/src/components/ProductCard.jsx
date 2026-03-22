@@ -4,6 +4,9 @@ import { CartContext } from '../context/CartContext';
 const ProductCard = ({ product }) => {
     const { addToCart } = useContext(CartContext);
 
+    // Dito natin ilalagay ang iyong live Render URL
+    const BACKEND_URL = "https://react-ecommerce-api-zpw8.onrender.com";
+
     return (
         <div className="product-card fade-in">
             <div className="product-img-wrapper">
@@ -13,7 +16,15 @@ const ProductCard = ({ product }) => {
                         -{product.discount}%
                     </div>
                 )}
-                <img src={product.image} className="product-img" alt={product.name} />
+                {/* FIX: Pinagsama ang BACKEND_URL at product.image 
+                  para lumabas ang pictures mula sa Render server.
+                */}
+                <img 
+                    src={`${BACKEND_URL}${product.image}`} 
+                    className="product-img" 
+                    alt={product.name} 
+                    onError={(e) => { e.target.src = "/placeholder.webp"; }} // Safety kung sakaling missing ang image
+                />
             </div>
 
             <div className="pt-2">

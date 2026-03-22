@@ -2,7 +2,7 @@ const products = [
     {
         id: 1,
         name: "Let's GOING Series-It Takes Two Series",
-        image: "http://localhost:5000/images/Pop-Product1.jpg",
+        image: "/images/Pop-Product1.jpg", 
         price: 1200,
         oldPrice: 1500,
         rating: 4,
@@ -12,7 +12,7 @@ const products = [
     {
         id: 2,
         name: "The MONSTERS Cafeteria Figurine",
-        image: "http://localhost:5000/images/Pop-Product2.jpg", 
+        image: "/images/Pop-Product2.jpg", 
         price: 900,
         oldPrice: 1100,
         rating: 5,
@@ -22,7 +22,7 @@ const products = [
     {
         id: 3,
         name: "SKULLPANDA x GUO PEI Action Figure",
-        image: "http://localhost:5000/images/Pop-Product3.jpg",
+        image: "/images/Pop-Product3.jpg",
         price: 2500,
         oldPrice: 3000,
         rating: 3,
@@ -32,7 +32,7 @@ const products = [
     {
         id: 4,
         name: "SPY x FAMILY Daily Life Series Figures",
-        image: "http://localhost:5000/images/Pop-Product4.jpg",
+        image: "/images/Pop-Product4.jpg",
         price: 1800,
         oldPrice: 2200,
         rating: 4,
@@ -42,37 +42,37 @@ const products = [
     {
         id: 5,
         name: "DIMOO WORLD × Pompompurin Figurine",
-        image: "http://localhost:5000/images/Pop-Product5.jpg",
+        image: "/images/Pop-Product5.jpg",
         price: 1400,
         oldPrice: 1700,
         rating: 5,
         discount: 12,
         category: "Figurines",
     },
-        {
+    {
         id: 6,
         name: "CRYBABY Tears Launch Series-Plush",
-        image: "http://localhost:5000/images/Pop-Product6.jpg",
+        image: "/images/Pop-Product6.jpg",
         price: 1400,
         oldPrice: 1700,
         rating: 5,
         discount: 12,
         category: "Plush Toys",
     },
-        {
+    {
         id: 7,
         name: "Stitch Adventure Series Vinyl Plush Pendant",
-        image: "http://localhost:5000/images/Pop-Product7.jpg",
+        image: "/images/Pop-Product7.jpg",
         price: 1400,
         oldPrice: 1700,
         rating: 5,
         discount: 12,
         category: "Plush Toys",
     },
-        {
+    {
         id: 8,
         name: "SPY x FAMILY Daily Life Blind Box",
-        image: "http://localhost:5000/images/Pop-Product8.jpg",
+        image: "/images/Pop-Product8.jpg",
         price: 1400,
         oldPrice: 1700,
         rating: 5,
