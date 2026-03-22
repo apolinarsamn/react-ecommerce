@@ -7,7 +7,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://react-ecommerce-api.onrender.com/api/products")
+    fetch("https://react-ecommerce-api-zpw8.onrender.com/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));

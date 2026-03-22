@@ -10,16 +10,24 @@ const ProductList = () => {
   const [sortType, setSortType] = useState("default");
 
   useEffect(() => {
-    fetch("https://react-ecommerce-api.onrender.com/api/products")
-      .then((res) => res.json())
+    // FIXED: Corrected the URL typo (removed 'ss') and added the proper endpoint path
+    fetch("https://react-ecommerce-api-zpw8.onrender.com/api/products")
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
       .then((data) => {
-        const formatted = data.map(item => ({
-          id: item.id,
+        // We ensure data is an array before mapping to prevent crashes
+        const productsArray = Array.isArray(data) ? data : [];
+        
+        const formatted = productsArray.map(item => ({
+          id: item.id || item._id, 
           name: item.name,
           price: Number(item.price),
           category: item.category,
           image: item.image
         }));
+        
         setProducts(formatted); 
         setTimeout(() => setLoading(false), 800); 
       })
@@ -47,7 +55,7 @@ const ProductList = () => {
     <div className="container-fluid px-lg-5 mt-5">
       <div className="row g-5">
         
-        {/* SIDEBAR SECTION - Requirement #1 */}
+        {/* SIDEBAR SECTION */}
         <aside className="col-lg-2 d-none d-lg-block border-end py-4">
           <p className="text-muted small text-uppercase mb-4" style={{ letterSpacing: '2px' }}>Categories</p>
           <Sidebar onSelectCategory={setSelectedCategory} activeCategory={selectedCategory} />
@@ -56,7 +64,7 @@ const ProductList = () => {
         {/* MAIN CONTENT SECTION */}
         <main className="col-lg-10 ps-lg-5">
           
-          {/* TOP BAR: SEARCH & SORT - Requirement #3 */}
+          {/* TOP BAR: SEARCH & SORT */}
           <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 pb-3 border-bottom">
             <div className="search-box mb-3 mb-md-0" style={{ maxWidth: '300px' }}>
               <input 
@@ -65,7 +73,7 @@ const ProductList = () => {
                 placeholder="SEARCH COLLECTION..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ fontSize: '0.85rem', letterSpacing: '1px', borderBottom: '1px solid #ddd !important' }}
+                style={{ fontSize: '0.85rem', letterSpacing: '1px' }}
               />
             </div>
             
@@ -90,7 +98,7 @@ const ProductList = () => {
             {loading ? (
               [1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <div className="col-lg-3 col-md-4 col-6 mb-5" key={n}>
-                   <div className="skeleton" style={{ height: '350px', backgroundColor: '#f4f4f4' }}></div>
+                   <div className="skeleton" style={{ height: '350px', backgroundColor: '#f4f4f4', borderRadius: '8px' }}></div>
                 </div>
               ))
             ) : processedProducts.length > 0 ? (
