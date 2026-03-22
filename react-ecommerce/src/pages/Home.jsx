@@ -29,31 +29,28 @@ const Home = () => {
           pause={false}
         >
           {/* Slide 1 */}
-          <Carousel.Item style={{ height: '85vh' }}>
+          <Carousel.Item className="hero-item">
             <img
-              className="d-block w-100 h-100"
+              className="d-block w-100 hero-img"
               src="/Banner1.webp"
-              style={{ objectFit: 'cover' }}
               alt="First editorial slide"
             />
           </Carousel.Item>
 
           {/* Slide 2 */}
-          <Carousel.Item style={{ height: '85vh' }}>
+          <Carousel.Item className="hero-item">
             <img
-              className="d-block w-100 h-100"
+              className="d-block w-100 hero-img"
               src="/Banner2.webp"
-              style={{ objectFit: 'cover' }}
               alt="Second editorial slide"
             />
           </Carousel.Item>
 
           {/* Slide 3 */}
-          <Carousel.Item style={{ height: '85vh' }}>
+          <Carousel.Item className="hero-item">
             <img
-              className="d-block w-100 h-100"
+              className="d-block w-100 hero-img"
               src="/Banner3.webp"
-              style={{ objectFit: 'cover' }}
               alt="Third editorial slide"
             />
           </Carousel.Item>
