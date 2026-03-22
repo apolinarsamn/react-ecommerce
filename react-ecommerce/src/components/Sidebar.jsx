@@ -5,8 +5,8 @@ const Sidebar = ({ onSelectCategory }) => {
   const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => {
-    // API Fetch for Categories
-    fetch("http://localhost:5000/api/categories")
+    // API Fetch for Categories - UPDATED URL to your Render backend
+    fetch("https://react-ecommerce-api-zpw8.onrender.com/api/categories")
       .then((response) => response.json())
       .then((data) => {
         // Siguraduhin na 'all' ang laging una
@@ -14,14 +14,15 @@ const Sidebar = ({ onSelectCategory }) => {
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
-        // Fallback categories kung offline ang API
-        setCategories(["all", "figures", "accessories", "limited"]);
+        // Fallback categories kung offline ang API (Updated to match your actual data case)
+        setCategories(["all", "Figurines", "Accessories", "Limited"]); 
       });
   }, []);
 
   const handleCategoryClick = (category) => {
     setActiveCategory(category);
-    onSelectCategory(category);
+    // Siguraduhin na 'all' ay lowercase para sa logic, pero ang iba ay ipasa as is
+    onSelectCategory(category); 
   };
 
   return (
@@ -41,10 +42,12 @@ const Sidebar = ({ onSelectCategory }) => {
               cursor: 'pointer',
               fontSize: '0.9rem',
               letterSpacing: '0.5px',
-              color: activeCategory === category ? '#000' : '#888',
+              // Dark Mode compatibility logic
+              color: activeCategory === category ? 'var(--lux-black)' : '#888',
               fontWeight: activeCategory === category ? '700' : '300',
-              borderLeft: activeCategory === category ? '2px solid #000' : '2px solid transparent',
-              paddingLeft: '12px transition all 0.3s ease'
+              borderLeft: activeCategory === category ? '2px solid var(--lux-black)' : '2px solid transparent',
+              paddingLeft: '12px',
+              transition: 'all 0.3s ease'
             }}
           >
             {category}
@@ -52,16 +55,16 @@ const Sidebar = ({ onSelectCategory }) => {
         ))}
       </div>
 
-      {/* Seasonal Promo Box - Minimalist version */}
+      {/* Seasonal Promo Box */}
       <div className="mt-5 pt-5 border-top d-none d-lg-block">
         <div className="p-4 bg-transparent border text-center">
           <p className="text-uppercase mb-1 fw-bold" style={{ fontSize: '0.65rem', letterSpacing: '2px' }}>
             New Season
           </p>
-          <p className="small text-muted mb-3 fw-light italic">Arrivals 2026</p>
+          <p className="small text-muted mb-3 fw-light">Arrivals 2026</p>
           <button 
-            className="btn btn-dark btn-sm rounded-0 w-100 py-2" 
-            style={{ fontSize: '0.6rem', letterSpacing: '1px' }}
+            className="btn-lux w-100 py-2" 
+            style={{ fontSize: '0.6rem', padding: '10px' }}
           >
             VIEW LOOKBOOK
           </button>
