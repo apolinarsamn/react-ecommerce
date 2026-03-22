@@ -1,0 +1,195 @@
+/* --- GOOGLE FONTS & ROOT --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;700&display=swap');
+
+:root {
+  --lux-black: #1a1a1a;
+  --lux-cream: #fbfaf8; 
+  --serif: 'Playfair Display', serif;
+  --sans: 'Inter', sans-serif;
+  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- THEME LOGIC (Dark Mode) --- */
+body {
+  min-height: 100vh; 
+  background-color: var(--lux-cream) !important;
+  font-family: var(--sans);
+  color: var(--lux-black) !important;
+  font-weight: 500; 
+  transition: background-color 0.5s ease, color 0.5s ease;
+  margin: 0;
+}
+
+body.dark-mode {
+  --lux-cream: #121212; 
+  --lux-black: #ffffff; 
+}
+
+/* Global Text Visibility in Dark Mode */
+body.dark-mode p, 
+body.dark-mode span, 
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
+body.dark-mode h4, body.dark-mode h5, body.dark-mode h6,
+body.dark-mode label,
+body.dark-mode .nav-link:not(.btn-lux) {
+  color: #ffffff !important;
+}
+
+/* --- STACKED NAVBAR & LAYOUT --- */
+.sticky-top {
+  z-index: 1050;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.navbar-brand {
+  font-family: var(--serif);
+  font-weight: 800 !important;
+  letter-spacing: -1.5px;
+}
+
+.nav-link {
+  position: relative;
+  transition: opacity 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  font-size: 0.75rem !important;
+}
+
+body.dark-mode .nav-link {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* --- CAROUSEL FIXES --- */
+/* Para makita ang indicators kahit light ang background */
+.carousel-indicators [data-bs-target] {
+    background-color: var(--lux-black) !important;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 6px;
+}
+
+body.dark-mode .carousel-indicators [data-bs-target] {
+    background-color: #ffffff !important;
+}
+
+/* Arrows visibility fix */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
+body.dark-mode .carousel-control-prev-icon,
+body.dark-mode .carousel-control-next-icon {
+    filter: invert(0);
+}
+
+/* --- SORT BY & DROPDOWN FIX --- */
+body.dark-mode select.form-select,
+body.dark-mode .sort-by-label,
+body.dark-mode .dropdown-toggle {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Dropdown arrow color fix para sa dark mode */
+body.dark-mode .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/* --- FOOTER DARK MODE FIX --- */
+/* Force dark background sa footer kahit may bg-white class */
+body.dark-mode footer, 
+body.dark-mode .footer-section {
+    background-color: #121212 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode footer h5, 
+body.dark-mode footer h6,
+body.dark-mode footer a,
+body.dark-mode footer p {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+body.dark-mode footer a:hover {
+    color: #ffffff !important;
+}
+
+/* Social icons visibility */
+body.dark-mode footer i {
+    color: #ffffff !important;
+}
+
+/* --- SEARCH & FORM FIXES --- */
+body.dark-mode .form-control,
+body.dark-mode input {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+body.dark-mode input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* --- PRODUCT CARDS --- */
+.product-card {
+  background: transparent !important;
+  border: none !important;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.product-img-wrapper {
+  background-color: #f4f4f4;
+  margin-bottom: 1.5rem;
+  aspect-ratio: 3 / 4; 
+  overflow: hidden;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+/* --- LUXURY BUTTONS --- */
+.btn-lux {
+  background: var(--lux-black);
+  color: var(--lux-cream);
+  border-radius: 0;
+  padding: 12px 35px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 1px solid var(--lux-black);
+  transition: 0.3s;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+body.dark-mode .btn-lux {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+/* --- ANIMATIONS --- */
+.fade-in {
+  opacity: 0;
+  animation: luxFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes luxFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
