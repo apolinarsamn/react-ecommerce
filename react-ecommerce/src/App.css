@@ -2,43 +2,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;700&display=swap');
 
 :root {
-  --lux-black: #1a1a1a;
+  /* LIGHT MODE VALUES */
   --lux-cream: #fbfaf8; 
+  --lux-black: #1a1a1a; 
+  --lux-gray: rgba(26, 26, 26, 0.6);
+  --lux-border: rgba(0, 0, 0, 0.08);
+  
   --serif: 'Playfair Display', serif;
   --sans: 'Inter', sans-serif;
-  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- THEME LOGIC (Dark Mode) --- */
+/* --- THEME LOGIC (Automatic Flip) --- */
+body.dark-mode {
+  /* DARK MODE VALUES */
+  --lux-cream: #121212; 
+  --lux-black: #ffffff; 
+  --lux-gray: rgba(255, 255, 255, 0.6);
+  --lux-border: rgba(255, 255, 255, 0.1);
+}
+
+/* --- GLOBAL ELEMENT RESET --- */
 body {
   min-height: 100vh; 
   background-color: var(--lux-cream) !important;
-  font-family: var(--sans);
   color: var(--lux-black) !important;
-  font-weight: 500; 
+  font-family: var(--sans);
   transition: background-color 0.5s ease, color 0.5s ease;
   margin: 0;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
 }
 
-body.dark-mode {
-  --lux-cream: #121212; 
-  --lux-black: #ffffff; 
+/* UNIVERSAL TEXT COLOR ADJUSTMENT */
+p, span, h1, h2, h3, h4, h5, h6, label, li, a, i, input, select, textarea {
+  color: var(--lux-black) !important;
+  transition: color 0.4s ease;
 }
 
-/* Global Text Visibility in Dark Mode */
-body.dark-mode p, 
-body.dark-mode span, 
-body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
-body.dark-mode h4, body.dark-mode h5, body.dark-mode h6,
-body.dark-mode label,
-body.dark-mode .nav-link:not(.btn-lux) {
-  color: #ffffff !important;
+a { text-decoration: none !important; }
+
+/* --- RESPONSIVE HERO CAROUSEL --- */
+.hero-viewport {
+    width: 100%;
+    background-color: #000;
 }
 
-/* --- STACKED NAVBAR & LAYOUT --- */
-.sticky-top {
-  z-index: 1050;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+.hero-item {
+    height: 80vh !important; /* Fixed height for desktop */
+    min-height: 450px;
+    overflow: hidden;
+}
+
+.hero-img {
+    height: 100% !important;
+    width: 100% !important;
+    /* This prevents the image from stretching/squashing */
+    object-fit: cover !important; 
+    object-position: center !important;
+}
+
+/* --- NAVBAR & HEADER --- */
+.sticky-top, .navbar {
+  background-color: var(--lux-cream) !important;
+  border-bottom: 1px solid var(--lux-border);
+  transition: var(--transition);
 }
 
 .navbar-brand {
@@ -47,123 +74,73 @@ body.dark-mode .nav-link:not(.btn-lux) {
   letter-spacing: -1.5px;
 }
 
-.nav-link {
-  position: relative;
-  transition: opacity 0.3s ease;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  font-size: 0.75rem !important;
+/* --- SIDEBAR & SHOP --- */
+.sidebar-lux {
+  border-right: 1px solid var(--lux-border);
 }
 
-/* --- HERO & CAROUSEL RESPONSIVE FIXES --- */
-/* Desktop View */
-.hero-item {
-    height: 85vh !important; 
-    overflow: hidden;
-    background-color: #000; /* Para walang white space habang naglo-load */
+.sidebar-lux span.active-lux {
+  font-weight: 700 !important;
+  border-left: 2px solid var(--lux-black);
+  padding-left: 10px;
 }
 
-.hero-img {
-    height: 100% !important;
-    width: 100% !important;
-    object-fit: cover !important;
-    object-position: center center !important; /* Siguradong nasa gitna ang focus */
+input.form-control, select.form-select {
+  background-color: transparent !important;
+  border: 1px solid var(--lux-border) !important;
+  color: var(--lux-black) !important;
+  border-radius: 0;
 }
 
-/* Mobile View Adjustments (Phones) */
+/* --- FOOTER --- */
+.footer-lux {
+  background-color: var(--lux-cream) !important;
+  border-top: 1px solid var(--lux-border);
+}
+
+/* --- MOBILE RESPONSIVENESS (The Big Fix) --- */
 @media (max-width: 768px) {
-    .hero-item {
-        height: 60vh !important; /* Adjusted from 50vh to 60vh para mas kita ang image */
+    /* Adjust Carousel for Phones */
+    .hero-item { 
+        height: 55vh !important; /* Shorter height for mobile screens */
+        min-height: 300px;
     }
 
-    .hero-img {
-        object-fit: cover !important;
-        height: 100% !important;
-    }
-
+    /* Adjust font sizes for mobile readability */
     .display-5 {
-        font-size: 1.5rem !important;
-        letter-spacing: 1px !important;
+        font-size: 1.8rem !important;
     }
 
-    .lux-home .container {
-        padding-top: 1.5rem !important;
+    /* Grid Spacing */
+    .row.g-5 {
+        --bs-gutter-x: 1rem; /* Reduces gap between product cards on small screens */
     }
 
-    /* Announcement Bar fix para hindi mag-wrap sa mobile */
-    header div.container {
-        font-size: 0.5rem !important;
-        letter-spacing: 1px !important;
-        white-space: nowrap; 
-        overflow: hidden;
-        text-overflow: ellipsis;
+    /* Hide sidebar border on mobile if it stacks */
+    .sidebar-lux {
+        border-right: none;
+        border-bottom: 1px solid var(--lux-border);
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
     }
-}
-
-/* Indicators visibility */
-.carousel-indicators [data-bs-target] {
-    background-color: var(--lux-black) !important;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin: 0 6px;
-}
-
-body.dark-mode .carousel-indicators [data-bs-target] {
-    background-color: #ffffff !important;
-}
-
-/* Arrows visibility */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: invert(1);
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-/* --- PRODUCT CARDS --- */
-.product-card {
-  background: transparent !important;
-  border: none !important;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.product-img-wrapper {
-  background-color: #f4f4f4;
-  margin-bottom: 1rem;
-  aspect-ratio: 3 / 4; 
-  overflow: hidden;
-}
-
-.product-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition);
 }
 
 /* --- LUXURY BUTTONS --- */
 .btn-lux {
-  background: var(--lux-black);
-  color: var(--lux-cream);
+  background-color: var(--lux-black) !important;
+  color: var(--lux-cream) !important;
+  border: 1px solid var(--lux-black) !important;
   border-radius: 0;
-  padding: 10px 25px;
-  font-size: 0.7rem;
+  padding: 12px 30px;
+  font-size: 0.75rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;
-  border: 1px solid var(--lux-black);
-  transition: 0.3s;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none;
+  transition: var(--transition);
 }
 
-body.dark-mode .btn-lux {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
+.btn-lux:hover {
+  filter: brightness(0.9);
 }
 
 /* --- ANIMATIONS --- */
