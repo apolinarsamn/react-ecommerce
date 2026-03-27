@@ -11,7 +11,7 @@ const Home = () => {
     fetch("https://react-ecommerce-api-zpw8.onrender.com/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
-      .catch((error) => console.error("Error fetching products:", error));
+      .catch((error) => console.error("Error:", error));
   }, []);
 
   const featuredProducts = products.slice(0, 6); 
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div className="lux-home fade-in">
       
-      {/* SECTION 1: FULL WIDTH HERO (Walang katabing sidebar dito) */}
+      {/* FULL WIDTH HERO SECTION */}
       <section className="hero-viewport">
         <Carousel fade indicators={true} controls={true} interval={5000} pause={false}>
           <Carousel.Item className="hero-item">
@@ -34,16 +34,16 @@ const Home = () => {
         </Carousel>
       </section>
 
-      {/* SECTION 2: GRID CONTENT (Dito lang dapat ang Sidebar) */}
-      <div className="container mt-5 pt-2">
+      {/* CONTENT GRID */}
+      <div className="container mt-5 pt-3">
         <div className="row">
           
-          {/* SIDEBAR - 3 Columns sa Desktop */}
-          <aside className="col-md-3 mb-5 sidebar-column">
+          {/* LEFT: SIDEBAR (3 columns) */}
+          <aside className="col-md-3 sidebar-column mb-5">
             <Sidebar />
           </aside>
 
-          {/* PRODUCT LIST - 9 Columns sa Desktop */}
+          {/* RIGHT: PRODUCTS (9 columns) */}
           <main className="col-md-9">
             <div className="text-center mb-5">
               <p className="small text-uppercase mb-2" style={{ letterSpacing: '3px', opacity: 0.6 }}>
@@ -57,7 +57,8 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="row g-3 g-md-4">
+            {/* PRODUCT GRID - Responsive spacing */}
+            <div className="row g-4">
               {featuredProducts.length > 0 ? (
                 featuredProducts.map((product) => (
                   <div key={product.id} className="col-6 col-lg-4">
@@ -67,7 +68,7 @@ const Home = () => {
               ) : (
                 <div className="col-12 text-center py-5">
                   <p className="small text-uppercase" style={{ letterSpacing: '2px', opacity: 0.5 }}>
-                    Loading Collection...
+                    Loading...
                   </p>
                 </div>
               )}

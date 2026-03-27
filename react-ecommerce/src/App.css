@@ -18,115 +18,73 @@ body.dark-mode {
   --lux-border: rgba(255, 255, 255, 0.1);
 }
 
-/* --- GLOBAL ELEMENT RESET --- */
+/* --- GLOBAL RESET --- */
 body {
   min-height: 100vh; 
   background-color: var(--lux-cream) !important;
   color: var(--lux-black) !important;
   font-family: var(--sans);
-  transition: background-color 0.5s ease, color 0.5s ease;
   margin: 0;
   overflow-x: hidden;
 }
 
-/* UNIVERSAL TEXT COLOR ADJUSTMENT */
-/* Removed 'span' and 'a' from the forced !important list so they can have custom colors (like active sidebar links) */
-p, h1, h2, h3, h4, h5, h6, label, li, i, input, select, textarea {
+/* Fix for all text in Dark Mode */
+p, h1, h2, h3, h4, h5, h6, label, span, a {
   color: var(--lux-black) !important;
-  transition: color 0.4s ease;
-}
-
-a, span {
-  color: var(--lux-black); /* Inherits theme color but allows overrides */
   text-decoration: none !important;
 }
 
-/* --- THE BIG CAROUSEL FIX --- */
+/* --- THE CAROUSEL FIX (No more stretching) --- */
 .hero-viewport {
     width: 100%;
     background-color: #000;
 }
 
 .hero-item {
-    height: 80vh !important; 
-    min-height: 450px;
-    position: relative; /* Safety for positioning */
+    height: 60vh !important; /* Reduced from 80vh to prevent vertical stretching */
+    min-height: 350px;
     overflow: hidden;
 }
 
-/* This is the class you MUST apply to your <img> tag in Home.jsx */
 .hero-img {
     height: 100% !important;
     width: 100% !important;
-    object-fit: cover !important; /* Prevents the "squished" look from your image */
+    object-fit: cover !important; /* Crops instead of squishing */
     object-position: center !important;
-    display: block;
 }
 
-/* --- NAVBAR & HEADER --- */
-.sticky-top, .navbar {
-  background-color: var(--lux-cream) !important;
-  border-bottom: 1px solid var(--lux-border);
+/* --- SIDEBAR & CONTENT GRID --- */
+.sidebar-column {
+    border-right: 1px solid var(--lux-border);
 }
 
-.navbar-brand {
-  font-family: var(--serif);
-  font-weight: 800 !important;
-  letter-spacing: -1.5px;
-}
-
-/* --- SIDEBAR & SHOP --- */
-.sidebar-lux {
-  border-right: 1px solid var(--lux-border);
-}
-
-/* Fixed: Active category will now show correctly */
 .sidebar-lux span {
-  color: var(--lux-gray);
-  transition: var(--transition);
+    display: block;
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: var(--transition);
 }
 
 .sidebar-lux span.active-lux {
-  color: var(--lux-black) !important;
-  font-weight: 700 !important;
-  border-left: 2px solid var(--lux-black);
-  padding-left: 10px;
+    opacity: 1 !important;
+    font-weight: 700 !important;
+    border-left: 2px solid var(--lux-black);
+    padding-left: 10px;
 }
 
-/* --- FOOTER --- */
-.footer-lux {
-  background-color: var(--lux-cream) !important;
-  border-top: 1px solid var(--lux-border);
+/* --- PRODUCT CARD RESPONSIVENESS --- */
+.product-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Forces square images like professional shops */
+    object-fit: cover !important;
 }
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    .hero-item { 
-        height: 50vh !important; 
-        min-height: 300px;
-    }
-
-    .display-5 {
-        font-size: 1.8rem !important;
-    }
-
-    .sidebar-lux {
-        border-right: none;
-        border-bottom: 1px solid var(--lux-border);
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-    }
-}
-
-/* --- LUXURY BUTTONS --- */
-.btn-lux {
-  background-color: var(--lux-black) !important;
-  color: var(--lux-cream) !important;
-  border: 1px solid var(--lux-black) !important;
-  border-radius: 0;
-  padding: 12px 30px;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 700;
+    .hero-item { height: 40vh !important; }
+    .sidebar-column { border-right: none; border-bottom: 1px solid var(--lux-border); margin-bottom: 30px; }
 }
