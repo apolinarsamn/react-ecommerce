@@ -8,110 +8,68 @@
   --lux-border: rgba(0, 0, 0, 0.08);
   --serif: 'Playfair Display', serif;
   --sans: 'Inter', sans-serif;
-  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- DARK MODE THEME --- */
 body.dark-mode {
   --lux-cream: #121212; 
   --lux-black: #ffffff; 
-  --lux-gray: rgba(255, 255, 255, 0.6);
   --lux-border: rgba(255, 255, 255, 0.1);
 }
 
 /* --- GLOBAL RESET --- */
 body {
-  min-height: 100vh; 
   background-color: var(--lux-cream) !important;
   color: var(--lux-black) !important;
   font-family: var(--sans);
-  transition: background-color 0.5s ease, color 0.5s ease;
   margin: 0;
   overflow-x: hidden;
 }
 
-/* UNIVERSAL TEXT COLOR ADJUSTMENT */
-p, h1, h2, h3, h4, h5, h6, label, li, i, input, select, textarea, span, a {
-  color: var(--lux-black) !important;
-  transition: color 0.4s ease;
-  text-decoration: none !important;
-}
-
-/* --- THE CAROUSEL RESPONSIVE FIX (NO CROP / NO SQUISH) --- */
+/* --- THE HEADER/CAROUSEL RESPONSIVE FIX --- */
 .hero-viewport {
     width: 100%;
-    background-color: var(--lux-cream); /* Matches theme if image is small */
+    background-color: var(--lux-cream);
 }
 
 .hero-item {
-    height: auto !important; /* Let the image define the height */
-    min-height: unset; 
+    /* Critical: allow height to adjust based on the image */
+    height: auto !important; 
+    min-height: unset !important;
 }
 
 .hero-img {
     width: 100% !important;
-    height: auto !important;
-    /* 'contain' ensures the whole image shows on any screen size */
-    object-fit: contain !important; 
+    height: auto !important; /* Susunod sa ratio ng picture */
+    object-fit: contain !important; /* No cropping */
     display: block;
 }
 
+/* --- PRODUCT IMAGE FIX (ANTI-STRETCH) --- */
+.product-card img {
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important; /* Square images */
+    object-fit: contain !important;
+    background-color: #f9f9f9;
+}
+
 /* --- DARK MODE ICON FIX --- */
-/* This flips black icons/logos to white when Dark Mode is toggled */
 body.dark-mode .navbar-icons img, 
-body.dark-mode .nav-link i,
-body.dark-mode .footer-lux img,
-body.dark-mode .navbar-brand img,
+body.dark-mode .nav-link i, 
 body.dark-mode .cart-icon {
     filter: invert(1) brightness(2) !important;
 }
 
-/* --- NAVBAR & HEADER --- */
-.sticky-top, .navbar {
-  background-color: var(--lux-cream) !important;
-  border-bottom: 1px solid var(--lux-border);
-}
-
-.navbar-brand {
-  font-family: var(--serif);
-  font-weight: 800 !important;
-  letter-spacing: -1.5px;
-}
-
-/* --- SIDEBAR (Still exists for Product List page) --- */
-.sidebar-lux {
-  border-right: 1px solid var(--lux-border);
-}
-
-.sidebar-lux span {
-  color: var(--lux-gray) !important;
-  transition: var(--transition);
-  display: block;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.sidebar-lux span.active-lux {
-  color: var(--lux-black) !important;
-  font-weight: 700 !important;
-  border-left: 2px solid var(--lux-black);
-  padding-left: 10px;
-}
-
-/* --- LUXURY BUTTONS & HOVER EFFECTS --- */
+/* --- BUTTONS --- */
 .btn-lux {
   background-color: var(--lux-black) !important;
   color: var(--lux-cream) !important;
   border: 1px solid var(--lux-black) !important;
-  border-radius: 0;
-  padding: 12px 30px;
-  font-size: 0.75rem;
+  padding: 12px 25px;
+  font-size: 0.7rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;
-  transition: all 0.3s ease !important;
-  display: inline-block;
-  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .btn-lux:hover {
@@ -119,38 +77,13 @@ body.dark-mode .cart-icon {
   color: var(--lux-black) !important;
 }
 
-body.dark-mode .btn-lux:hover {
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-
-/* --- FOOTER --- */
-.footer-lux {
-  background-color: var(--lux-cream) !important;
-  border-top: 1px solid var(--lux-border);
-  padding: 40px 0;
-}
-
-/* --- MOBILE RESPONSIVENESS --- */
+/* --- MOBILE SPECIFIC FIXES --- */
 @media (max-width: 768px) {
-    .hero-img {
-        min-height: 180px; /* Prevents it from being too thin on tiny phones */
+    .carousel-control-prev, .carousel-control-next {
+        display: none; /* Removes bulky arrows on small screens for a cleaner look */
     }
-
-    .sidebar-lux {
-        border-right: none;
-        border-bottom: 1px solid var(--lux-border);
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
+    
+    .hero-viewport {
+        margin-top: 0;
     }
-}
-
-/* --- ANIMATIONS --- */
-.fade-in {
-  animation: fadeInAni 0.8s ease-in;
-}
-
-@keyframes fadeInAni {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }

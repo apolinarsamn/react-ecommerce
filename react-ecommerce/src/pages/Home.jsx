@@ -18,34 +18,30 @@ const Home = () => {
   return (
     <div className="lux-home fade-in">
       
-      {/* FULL WIDTH HERO - NO CROP & RESPONSIVE */}
+      {/* HEADER CAROUSEL - SCALES TO PHONE SIZE */}
       <section className="hero-viewport">
-        <Carousel fade indicators={true} controls={true} interval={5000} pause={false}>
+        <Carousel fade indicators={true} controls={true} interval={5000}>
           <Carousel.Item className="hero-item">
-            <img className="hero-img" src="/Banner1.webp" alt="Slide 1" />
+            <img className="hero-img" src="/Banner1.webp" alt="Banner 1" />
           </Carousel.Item>
           <Carousel.Item className="hero-item">
-            <img className="hero-img" src="/Banner2.webp" alt="Slide 2" />
+            <img className="hero-img" src="/Banner2.webp" alt="Banner 2" />
           </Carousel.Item>
           <Carousel.Item className="hero-item">
-            <img className="hero-img" src="/Banner3.webp" alt="Slide 3" />
+            <img className="hero-img" src="/Banner3.webp" alt="Banner 3" />
           </Carousel.Item>
         </Carousel>
       </section>
 
-      {/* PRODUCT GRID - ITO AY MAGIGING FULL WIDTH NA NGAYON */}
-      <div className="container mt-5">
-        <div className="text-center mb-5">
-          <p className="small text-uppercase mb-2" style={{ letterSpacing: '3px', opacity: 0.6 }}>
-            The Selection
-          </p>
-          <h2 className="display-6 mb-3" style={{ fontFamily: "var(--serif)" }}>
-            Best Mini Figurines
-          </h2>
+      {/* CONTENT GRID */}
+      <div className="container mt-4 mt-md-5">
+        <div className="text-center mb-4 mb-md-5">
+          <p className="small text-uppercase mb-2" style={{ letterSpacing: '3px', opacity: 0.6 }}>The Selection</p>
+          <h2 className="display-6 mb-3" style={{ fontFamily: "var(--serif)" }}>Best Mini Figurines</h2>
         </div>
 
-        {/* 4 columns sa desktop, 2 sa mobile */}
-        <div className="row g-3 g-md-4">
+        {/* 2 columns on phone, 4 on desktop */}
+        <div className="row g-2 g-md-4">
           {featuredProducts.map((product) => (
             <div key={product.id} className="col-6 col-md-4 col-lg-3">
               <ProductCard product={product} />
@@ -54,9 +50,7 @@ const Home = () => {
         </div>
 
         <div className="text-center my-5">
-          <Link to="/products" className="btn-lux text-decoration-none">
-            View All Collections
-          </Link>
+          <Link to="/products" className="btn-lux text-decoration-none">View All Collections</Link>
         </div>
       </div>
     </div>
