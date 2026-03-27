@@ -3,8 +3,6 @@ import { CartContext } from '../context/CartContext';
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useContext(CartContext);
-
-    // Dito natin ilalagay ang iyong live Render URL
     const BACKEND_URL = "https://react-ecommerce-api-zpw8.onrender.com";
 
     return (
@@ -16,28 +14,26 @@ const ProductCard = ({ product }) => {
                         -{product.discount}%
                     </div>
                 )}
-                {/* FIX: Pinagsama ang BACKEND_URL at product.image 
-                  para lumabas ang pictures mula sa Render server.
-                */}
                 <img 
                     src={`${BACKEND_URL}${product.image}`} 
                     className="product-img" 
                     alt={product.name} 
-                    onError={(e) => { e.target.src = "/placeholder.webp"; }} // Safety kung sakaling missing ang image
+                    onError={(e) => { e.target.src = "/placeholder.webp"; }} 
                 />
             </div>
 
-            <div className="pt-2">
+            {/* Added wrapper for alignment */}
+            <div className="product-info-wrapper pt-2">
                 <p className="text-muted mb-1 text-uppercase small" style={{ letterSpacing: '2px', fontSize: '0.6rem' }}>
                     {product.category || 'Editorial'}
                 </p>
-                <h6 className="fw-bold text-uppercase" style={{ fontSize: '0.85rem', letterSpacing: '0.5px' }}>
+                <h6 className="product-title-aligned fw-bold text-uppercase">
                     {product.name}
                 </h6>
                 <p className="price-tag mb-3">₱{product.price.toLocaleString()}</p>
                 
                 <button 
-                    className="btn-lux w-100" 
+                    className="btn-lux w-100 mt-auto" 
                     onClick={() => addToCart(product)}
                 >
                     Add to Bag

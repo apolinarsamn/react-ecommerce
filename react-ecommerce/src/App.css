@@ -8,68 +8,122 @@
   --lux-border: rgba(0, 0, 0, 0.08);
   --serif: 'Playfair Display', serif;
   --sans: 'Inter', sans-serif;
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* --- DARK MODE THEME --- */
 body.dark-mode {
   --lux-cream: #121212; 
   --lux-black: #ffffff; 
+  --lux-gray: rgba(255, 255, 255, 0.6);
   --lux-border: rgba(255, 255, 255, 0.1);
 }
 
 /* --- GLOBAL RESET --- */
 body {
+  min-height: 100vh; 
   background-color: var(--lux-cream) !important;
   color: var(--lux-black) !important;
   font-family: var(--sans);
+  transition: background-color 0.5s ease, color 0.5s ease;
   margin: 0;
   overflow-x: hidden;
 }
 
-/* --- THE HEADER/CAROUSEL RESPONSIVE FIX --- */
+p, h1, h2, h3, h4, h5, h6, span, a {
+  color: var(--lux-black) !important;
+  text-decoration: none !important;
+}
+
+/* --- THE CAROUSEL (NO CROP / NO STRETCH) --- */
 .hero-viewport {
     width: 100%;
     background-color: var(--lux-cream);
 }
 
 .hero-item {
-    /* Critical: allow height to adjust based on the image */
-    height: auto !important; 
+    height: auto !important; /* Susunod sa ratio ng picture para hindi ma-stretch */
     min-height: unset !important;
 }
 
 .hero-img {
     width: 100% !important;
-    height: auto !important; /* Susunod sa ratio ng picture */
-    object-fit: contain !important; /* No cropping */
+    height: auto !important;
+    object-fit: contain !important; /* Buong banner ang makikita kahit sa phone */
     display: block;
 }
 
-/* --- PRODUCT IMAGE FIX (ANTI-STRETCH) --- */
-.product-card img {
-    width: 100% !important;
-    aspect-ratio: 1 / 1 !important; /* Square images */
-    object-fit: contain !important;
+/* --- PRODUCT CARD ALIGNMENT FIX --- */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Pinipilit ang lahat ng card na maging pantay ang haba */
+    background: transparent;
+    transition: var(--transition);
+}
+
+.product-img-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1 !important; /* Perfect square frame para sa lahat */
+    overflow: hidden;
     background-color: #f9f9f9;
+    margin-bottom: 10px;
+}
+
+.product-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Siguradong hindi "squished" ang figurines */
+    transition: transform 0.5s ease;
+}
+
+.product-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Kinukuha ang extra space para laging nasa baba ang button */
+}
+
+.product-title-aligned {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    height: 2.6rem; /* Fixed height para sa 2 lines ng text para pantay ang grid */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.price-tag {
+    font-size: 0.9rem;
+    margin-bottom: 15px !important;
+    opacity: 0.8;
 }
 
 /* --- DARK MODE ICON FIX --- */
 body.dark-mode .navbar-icons img, 
 body.dark-mode .nav-link i, 
-body.dark-mode .cart-icon {
-    filter: invert(1) brightness(2) !important;
+body.dark-mode .cart-icon,
+body.dark-mode .navbar-brand img {
+    filter: invert(1) brightness(2) !important; /* Ginagawang puti ang black icons */
 }
 
-/* --- BUTTONS --- */
+/* --- LUXURY BUTTONS & HOVER --- */
 .btn-lux {
   background-color: var(--lux-black) !important;
   color: var(--lux-cream) !important;
   border: 1px solid var(--lux-black) !important;
-  padding: 12px 25px;
-  font-size: 0.7rem;
+  border-radius: 0;
+  padding: 12px 20px;
+  font-size: 0.75rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 700;
-  transition: 0.3s ease;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+  margin-top: auto !important; /* Laging nakadikit sa ilalim ng card */
 }
 
 .btn-lux:hover {
@@ -77,13 +131,36 @@ body.dark-mode .cart-icon {
   color: var(--lux-black) !important;
 }
 
-/* --- MOBILE SPECIFIC FIXES --- */
+body.dark-mode .btn-lux:hover {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+  background-color: var(--lux-cream) !important;
+  border-bottom: 1px solid var(--lux-border);
+}
+
+.navbar-brand {
+  font-family: var(--serif);
+  font-weight: 800 !important;
+}
+
+/* --- ANIMATIONS --- */
+.fade-in {
+  animation: fadeInAni 0.8s ease-in;
+}
+
+@keyframes fadeInAni {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- MOBILE ADJUSTMENTS --- */
 @media (max-width: 768px) {
-    .carousel-control-prev, .carousel-control-next {
-        display: none; /* Removes bulky arrows on small screens for a cleaner look */
-    }
-    
-    .hero-viewport {
-        margin-top: 0;
+    .product-title-aligned {
+        font-size: 0.75rem;
+        height: 2.2rem;
     }
 }
