@@ -11,6 +11,7 @@
   --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* --- DARK MODE THEME --- */
 body.dark-mode {
   --lux-cream: #121212; 
   --lux-black: #ffffff; 
@@ -24,67 +25,132 @@ body {
   background-color: var(--lux-cream) !important;
   color: var(--lux-black) !important;
   font-family: var(--sans);
+  transition: background-color 0.5s ease, color 0.5s ease;
   margin: 0;
   overflow-x: hidden;
 }
 
-/* Fix for all text in Dark Mode */
-p, h1, h2, h3, h4, h5, h6, label, span, a {
+/* UNIVERSAL TEXT COLOR ADJUSTMENT */
+p, h1, h2, h3, h4, h5, h6, label, li, i, input, select, textarea, span, a {
   color: var(--lux-black) !important;
+  transition: color 0.4s ease;
   text-decoration: none !important;
 }
 
-/* --- THE CAROUSEL FIX (No more stretching) --- */
+/* --- THE CAROUSEL RESPONSIVE FIX (NO CROP / NO SQUISH) --- */
 .hero-viewport {
     width: 100%;
-    background-color: #000;
+    background-color: var(--lux-cream); /* Matches theme if image is small */
 }
 
 .hero-item {
-    height: 60vh !important; /* Reduced from 80vh to prevent vertical stretching */
-    min-height: 350px;
-    overflow: hidden;
+    height: auto !important; /* Let the image define the height */
+    min-height: unset; 
 }
 
 .hero-img {
-    height: 100% !important;
     width: 100% !important;
-    object-fit: cover !important; /* Crops instead of squishing */
-    object-position: center !important;
+    height: auto !important;
+    /* 'contain' ensures the whole image shows on any screen size */
+    object-fit: contain !important; 
+    display: block;
 }
 
-/* --- SIDEBAR & CONTENT GRID --- */
-.sidebar-column {
-    border-right: 1px solid var(--lux-border);
+/* --- DARK MODE ICON FIX --- */
+/* This flips black icons/logos to white when Dark Mode is toggled */
+body.dark-mode .navbar-icons img, 
+body.dark-mode .nav-link i,
+body.dark-mode .footer-lux img,
+body.dark-mode .navbar-brand img,
+body.dark-mode .cart-icon {
+    filter: invert(1) brightness(2) !important;
+}
+
+/* --- NAVBAR & HEADER --- */
+.sticky-top, .navbar {
+  background-color: var(--lux-cream) !important;
+  border-bottom: 1px solid var(--lux-border);
+}
+
+.navbar-brand {
+  font-family: var(--serif);
+  font-weight: 800 !important;
+  letter-spacing: -1.5px;
+}
+
+/* --- SIDEBAR (Still exists for Product List page) --- */
+.sidebar-lux {
+  border-right: 1px solid var(--lux-border);
 }
 
 .sidebar-lux span {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: var(--transition);
+  color: var(--lux-gray) !important;
+  transition: var(--transition);
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .sidebar-lux span.active-lux {
-    opacity: 1 !important;
-    font-weight: 700 !important;
-    border-left: 2px solid var(--lux-black);
-    padding-left: 10px;
+  color: var(--lux-black) !important;
+  font-weight: 700 !important;
+  border-left: 2px solid var(--lux-black);
+  padding-left: 10px;
 }
 
-/* --- PRODUCT CARD RESPONSIVENESS --- */
-.product-card img {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Forces square images like professional shops */
-    object-fit: cover !important;
+/* --- LUXURY BUTTONS & HOVER EFFECTS --- */
+.btn-lux {
+  background-color: var(--lux-black) !important;
+  color: var(--lux-cream) !important;
+  border: 1px solid var(--lux-black) !important;
+  border-radius: 0;
+  padding: 12px 30px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: all 0.3s ease !important;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn-lux:hover {
+  background-color: transparent !important;
+  color: var(--lux-black) !important;
+}
+
+body.dark-mode .btn-lux:hover {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* --- FOOTER --- */
+.footer-lux {
+  background-color: var(--lux-cream) !important;
+  border-top: 1px solid var(--lux-border);
+  padding: 40px 0;
 }
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    .hero-item { height: 40vh !important; }
-    .sidebar-column { border-right: none; border-bottom: 1px solid var(--lux-border); margin-bottom: 30px; }
+    .hero-img {
+        min-height: 180px; /* Prevents it from being too thin on tiny phones */
+    }
+
+    .sidebar-lux {
+        border-right: none;
+        border-bottom: 1px solid var(--lux-border);
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+    }
+}
+
+/* --- ANIMATIONS --- */
+.fade-in {
+  animation: fadeInAni 0.8s ease-in;
+}
+
+@keyframes fadeInAni {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
